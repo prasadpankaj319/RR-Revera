@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
         showDashboard();
     }
 
+    // Mobile Hamburger Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
     // Login Logic
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
