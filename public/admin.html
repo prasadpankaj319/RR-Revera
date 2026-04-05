@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - RR REVERA</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-login-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .admin-login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .admin-dashboard {
+            display: none; /* hidden by default until logged in */
+        }
+        .admin-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .product-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .product-list-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+    </style>
+
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+</head>
+<body style="background-color: #f4f4f4;">
+
+    <!-- Login Overlay -->
+    <div class="admin-login-overlay" id="login-overlay">
+        <div class="admin-login-box">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary-color);">Admin Access</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="password" id="admin-password" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p id="login-error" style="color: red; margin-top: 1rem; display: none;">Invalid password!</p>
+        </div>
+    </div>
+
+    <header class="admin-dashboard">
+        <div class="nav-container">
+            <div class="logo">RR REVERA - ADMIN</div>
+            <nav>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="admin-tab active" data-target="dashboard-view" style="color: var(--primary-color);">Dashboard</a></li>
+                    <li><a href="#" class="admin-tab" data-target="add-view">Add Product</a></li>
+                    <li><a href="#" class="admin-tab" data-target="manage-view">Manage Products</a></li>
+                    <li><a href="#" class="admin-tab" data-target="messages-view">Messages</a></li>
+                    <li><a href="index.html" target="_blank">Live Site</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container admin-dashboard">
+        
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="admin-view">
+            <h2 style="margin-bottom: 1.5rem;">Dashboard Overview</h2>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div class="admin-section" style="flex: 1; min-width: 200px; text-align: center;">
+                    <h3>Total Products</h3>
+                    <p id="stat-total" style="font-size: 3rem; color: var(--primary-color); font-weight: bold; margin-top: 1rem;">-</p>
+                </div>
+                <div class="admin-section" style="flex: 1; min-width: 200px; text-align: center;">
+                    <h3>Featured Products</h3>
+                    <p id="stat-featured" style="font-size: 3rem; color: var(--primary-color); font-weight: bold; margin-top: 1rem;">-</p>
+                </div>
+                <div class="admin-section" style="flex: 1; min-width: 200px; text-align: center;">
+                    <h3>Messages</h3>
+                    <p id="stat-messages" style="font-size: 3rem; color: var(--primary-color); font-weight: bold; margin-top: 1rem;">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add View -->
+        <div id="add-view" class="admin-section admin-view" style="display: none;">
+            <h2 style="margin-bottom: 1.5rem;">Add New Product</h2>
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="p-name" required placeholder="e.g. Summer Floral Dress">
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" id="p-price" required placeholder="e.g. ₹1299">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="p-desc" required placeholder="A brief description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Sizes (Comma separated)</label>
+                    <input type="text" id="p-sizes" placeholder="e.g. 3-4Y, 5-6Y">
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" id="p-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="p-featured"> Show on Home Page (Featured)
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div>
+
+        <!-- Manage View -->
+        <div id="manage-view" class="admin-section admin-view" style="display: none;">
+            <h2 style="margin-bottom: 1.5rem;">Manage Existing Products</h2>
+            <div id="admin-product-list">
+                <p>Loading products...</p>
+            </div>
+        </div>
+
+        <!-- Messages View -->
+        <div id="messages-view" class="admin-section admin-view" style="display: none;">
+            <h2 style="margin-bottom: 1.5rem;">Customer Inquiries</h2>
+            <div id="admin-message-list">
+                <p>Loading messages...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

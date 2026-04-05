@@ -1,0 +1,38 @@
+[
+ {
+  "id": 1,
+  "name": "Lavender Dream Dress",
+  "price": "₹1299",
+  "image": "images/dress1.jpg",
+  "description": "A beautiful lavender dress with subtle lace detailing. Perfect for summer parties and casual outings.",
+  "sizes": ["3-4Y", "5-6Y", "7-8Y"],
+  "featured": true
+ },
+ {
+  "id": 2,
+  "name": "White Pearl Top & Skirt",
+  "price": "₹1499",
+  "image": "images/dress2.jpg",
+  "description": "An elegant white top paired with a soft pastel skirt. Made from premium, breathable organic cotton.",
+  "sizes": ["4-5Y", "6-7Y", "8-9Y"],
+  "featured": true
+ },
+ {
+  "id": 3,
+  "name": "Classic Purple Party Gown",
+  "price": "₹1899",
+  "image": "images/dress3.jpg",
+  "description": "Make a statement with this premium purple gown featuring soft tulle layers and a silk ribbon.",
+  "sizes": ["5-6Y", "7-8Y", "9-10Y"],
+  "featured": true
+ },
+ {
+  "id": 4,
+  "name": "Minimalist Casual Co-ord",
+  "price": "₹999",
+  "image": "images/dress4.jpg",
+  "description": "A simple yet chic co-ord set for everyday wear. Super soft, stretchy and comfortable.",
+  "sizes": ["3-4Y", "5-6Y", "7-8Y"],
+  "featured": false
+ }
+]
